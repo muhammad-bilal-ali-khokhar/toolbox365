@@ -82,13 +82,12 @@ function getRelevantContext(): string {
 
 // Generate feature with Gemini — no validation, no fix attempts, no retries
 // If it fails, log and move on. Next day = next feature.
-async function buildFeature(featureLine: string): Promise<'success' | 'failed' | 'rate_limited'> {
+async function buildFeature(featureLine: string, slug: string): Promise<'success' | 'failed' | 'rate_limited'> {
   const context = getRelevantContext()
-  console.log(`  Generating feature with Gemini...`)
+  console.log(`  Generating feature with Gemini... [slug: ${slug}]`)
   try {
-    const changes = await generateFeature(featureLine, context)
-    // Only apply files scoped to this feature's slug — never touch other days
-    const slug = featureLine.split('|')[2]?.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') ?? `day-${Date.now()}`
+    const changes = await generateFeature(featureLine, context, slug)
+    // Only apply files strictly within this feature's slug paths
     const allowed = [
       `apps/web/app/tools/${slug}/`,
       `apps/api/src/features/${slug}/`,
@@ -98,12 +97,14 @@ async function buildFeature(featureLine: string): Promise<'success' | 'failed' |
       allowed.some((prefix) => f.path.startsWith(prefix))
     )
     if (scoped.length === 0) {
-      // Gemini returned files outside allowed paths — apply all but warn
-      console.log(`  ⚠ No scoped files found, applying all ${changes.files.length} files`)
-      applyFileChanges(changes.files)
-    } else {
-      applyFileChanges(scoped)
+      // Gemini returned no files in allowed paths — hard reject, do not apply anything
+      console.log(`  ❌ Gemini returned no files within allowed paths. Rejecting all changes.`)
+      console.log(`  Allowed: ${allowed.join(', ')}`)
+      console.log(`  Got: ${changes.files.map((f) => f.path).join(', ')}`)
+      return 'failed'
     }
+    console.log(`  Scoped ${scoped.length}/${changes.files.length} files within allowed paths`)
+    applyFileChanges(scoped)
     return 'success'
   } catch (err) {
     if (err instanceof AllKeysRateLimitedError) return 'rate_limited'
@@ -162,13 +163,15 @@ async function main() {
     return
   }
 
-  console.log(`\n📦 Day ${targetDay}: ${featureLine.trim()}`)
+  const slug = featureLine.split('|')[2]?.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') ?? `day-${targetDay}`
+
+  console.log(`\n📦 Day ${targetDay} [${slug}]: ${featureLine.trim()}`)
   progress.currentFeatureDay = targetDay
   progress.currentFeatureRetries = 0
   writeProgress(progress)
 
   const buildStart = Date.now()
-  const result = await buildFeature(featureLine)
+  const result = await buildFeature(featureLine, slug)
   const now = new Date().toISOString()
   const buildDuration = Math.round((Date.now() - buildStart) / 1000)
 

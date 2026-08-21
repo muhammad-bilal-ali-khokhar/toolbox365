@@ -48,7 +48,7 @@ async function callGemini(prompt: string): Promise<string> {
 
     try {
       const client = new GoogleGenerativeAI(keys[i])
-      const model = client.getGenerativeModel({ model: 'gemini-3.6-flash' })
+      const model = client.getGenerativeModel({ model: 'gemini-2.0-flash' })
       const result = await model.generateContent(prompt)
       const text = result.response.text()
       const inputEst = Math.ceil(prompt.length / 4)
@@ -100,16 +100,19 @@ You are an autonomous feature builder for the 365 project.
 
 RULES:
 1. Implement ONLY the specified feature. Nothing else.
-2. Do NOT modify or remove any existing features.
+2. Do NOT modify or remove ANY existing files — no layout.tsx, no page.tsx, no config files, no shared files.
 3. Do NOT change project architecture.
-4. Do NOT change configuration files unless required by this feature.
-5. Create the feature as a self-contained module.
-6. Follow existing code patterns and conventions.
-7. Write clean, readable TypeScript.
-8. Add a Vitest unit test for the feature.
-9. Return ONLY a JSON object with file changes. No explanation, no markdown, no extra text.
-10. New pages go to: apps/web/app/tools/[feature-slug]/page.tsx
-11. New API logic goes to: apps/api/src/features/[feature-slug]/
+4. Create the feature as a completely self-contained module.
+5. Follow existing code patterns and conventions.
+6. Write clean, readable TypeScript.
+7. Return ONLY a JSON object with file changes. No explanation, no markdown, no extra text.
+
+STRICT FILE PATH RULES — you MUST follow these exactly:
+- The feature page MUST go to: apps/web/app/tools/SLUG/page.tsx
+- Optional API logic goes to: apps/api/src/features/SLUG/
+- Optional shared types go to: packages/shared/src/
+- You MUST NOT write to any other path. No exceptions.
+- SLUG will be provided to you in the feature spec below.
 
 Response format (strict JSON, no markdown fences):
 {
@@ -125,13 +128,18 @@ Response format (strict JSON, no markdown fences):
 export async function generateFeature(
   featureSpec: string,
   existingCode: string,
+  slug: string,
 ): Promise<{ files: { path: string; content: string }[] }> {
   const prompt = `${AGENT_RULES}
 
 Feature to implement:
 ${featureSpec}
 
-Existing relevant code for context:
+SLUG for this feature: ${slug}
+You MUST write the page to: apps/web/app/tools/${slug}/page.tsx
+You MUST NOT write to any other path outside apps/web/app/tools/${slug}/ or apps/api/src/features/${slug}/
+
+Existing relevant code for context (DO NOT modify any of these files):
 ${existingCode}
 
 Return only the JSON object with file changes.`
