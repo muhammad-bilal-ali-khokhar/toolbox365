@@ -1,10 +1,10 @@
 {
   "status": "running",
-  "currentDay": 336,
+  "currentDay": 337,
   "totalFeatures": 365,
   "completedFeatures": 0,
-  "failedAttempts": 336,
-  "lastBuildDate": "2026-08-21T11:22:57.925Z",
+  "failedAttempts": 337,
+  "lastBuildDate": "2026-08-21T11:23:11.370Z",
   "lastBuildStatus": "failed",
   "startDate": "2026-08-21T09:30:47.593Z",
   "currentFeatureDay": null,
@@ -3032,6 +3032,15 @@
       "name": "| 336 | Image Compressor | File | Compress images in the browser | pending |",
       "status": "failed",
       "date": "2026-08-21T11:22:57.925Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 54525
+    },
+    {
+      "day": 337,
+      "name": "| 337 | Image Resizer | File | Resize images to specific dimensions | pending |",
+      "status": "failed",
+      "date": "2026-08-21T11:23:11.370Z",
       "retries": 5,
       "duration": 0,
       "tokensUsed": 54525
