@@ -1,10 +1,10 @@
 {
   "status": "running",
-  "currentDay": 211,
+  "currentDay": 212,
   "totalFeatures": 365,
   "completedFeatures": 0,
-  "failedAttempts": 211,
-  "lastBuildDate": "2026-08-21T10:54:52.344Z",
+  "failedAttempts": 212,
+  "lastBuildDate": "2026-08-21T10:55:05.749Z",
   "lastBuildStatus": "failed",
   "startDate": "2026-08-21T09:30:47.593Z",
   "currentFeatureDay": null,
@@ -1907,6 +1907,15 @@
       "name": "| 211 | VAT Calculator | Finance | Calculate VAT inclusive/exclusive | pending |",
       "status": "failed",
       "date": "2026-08-21T10:54:52.344Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 54525
+    },
+    {
+      "day": 212,
+      "name": "| 212 | Percentage Calculator | Finance | Calculate percentages and changes | pending |",
+      "status": "failed",
+      "date": "2026-08-21T10:55:05.749Z",
       "retries": 5,
       "duration": 0,
       "tokensUsed": 54525
