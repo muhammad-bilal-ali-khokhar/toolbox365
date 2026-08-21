@@ -1,10 +1,10 @@
 {
   "status": "running",
-  "currentDay": 251,
+  "currentDay": 252,
   "totalFeatures": 365,
   "completedFeatures": 0,
-  "failedAttempts": 251,
-  "lastBuildDate": "2026-08-21T11:03:50.641Z",
+  "failedAttempts": 252,
+  "lastBuildDate": "2026-08-21T11:04:03.969Z",
   "lastBuildStatus": "failed",
   "startDate": "2026-08-21T09:30:47.593Z",
   "currentFeatureDay": null,
@@ -2267,6 +2267,15 @@
       "name": "| 251 | Spacing Scale Generator | Design | Generate spacing scales | pending |",
       "status": "failed",
       "date": "2026-08-21T11:03:50.641Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 54525
+    },
+    {
+      "day": 252,
+      "name": "| 252 | Icon Finder | Design | Search and copy common SVG icons | pending |",
+      "status": "failed",
+      "date": "2026-08-21T11:04:03.969Z",
       "retries": 5,
       "duration": 0,
       "tokensUsed": 54525
