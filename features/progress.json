@@ -1,13 +1,13 @@
 {
   "status": "running",
-  "currentDay": 0,
+  "currentDay": 1,
   "totalFeatures": 365,
   "completedFeatures": 0,
-  "failedAttempts": 0,
-  "lastBuildDate": null,
-  "lastBuildStatus": null,
+  "failedAttempts": 1,
+  "lastBuildDate": "2026-08-21T15:59:26.281Z",
+  "lastBuildStatus": "failed",
   "startDate": "2026-08-21T15:30:14.697Z",
-  "currentFeatureDay": 1,
+  "currentFeatureDay": null,
   "currentFeatureRetries": 0,
   "rateLimitedUntil": null,
   "apiKeys": [
@@ -20,5 +20,26 @@
       "rateLimitedUntil": null
     }
   ],
-  "features": []
+  "features": [
+    {
+      "day": 1,
+      "name": "| 001 | JSON Formatter | Developer | Format and prettify JSON input | pending |",
+      "status": "failed",
+      "date": "2026-08-21T15:59:26.281Z",
+      "retries": 0,
+      "duration": 54,
+      "tokensUsed": 6856
+    }
+  ],
+  "currentFeatureName": null,
+  "geminiStats": {
+    "tokensUsed": 6856,
+    "tokenBudget": 50000,
+    "tokenBudgetRemaining": 43144,
+    "totalCalls": 1,
+    "totalInputTokens": 2021,
+    "totalOutputTokens": 4835,
+    "rateLimitedKeys": 0,
+    "totalKeys": 2
+  }
 }
