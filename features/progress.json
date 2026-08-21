@@ -1,10 +1,10 @@
 {
   "status": "running",
-  "currentDay": 207,
+  "currentDay": 208,
   "totalFeatures": 365,
   "completedFeatures": 0,
-  "failedAttempts": 207,
-  "lastBuildDate": "2026-08-21T10:53:58.786Z",
+  "failedAttempts": 208,
+  "lastBuildDate": "2026-08-21T10:54:12.131Z",
   "lastBuildStatus": "failed",
   "startDate": "2026-08-21T09:30:47.593Z",
   "currentFeatureDay": null,
@@ -1871,6 +1871,15 @@
       "name": "| 207 | Net Worth Calculator | Finance | Calculate personal net worth | pending |",
       "status": "failed",
       "date": "2026-08-21T10:53:58.786Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 54525
+    },
+    {
+      "day": 208,
+      "name": "| 208 | Budget Planner | Finance | Plan monthly income and expenses | pending |",
+      "status": "failed",
+      "date": "2026-08-21T10:54:12.131Z",
       "retries": 5,
       "duration": 0,
       "tokensUsed": 54525
