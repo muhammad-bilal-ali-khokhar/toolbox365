@@ -34,6 +34,7 @@ interface Progress {
   startDate: string | null
   currentFeatureDay: number | null
   currentFeatureRetries: number
+  currentFeatureName: string | null
   rateLimitedUntil: string | null
   apiKeys: ApiKeyStatus[]
   features: FeatureEntry[]
@@ -164,10 +165,13 @@ async function main() {
   }
 
   const slug = featureLine.split('|')[2]?.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') ?? `day-${targetDay}`
+  const featureName = featureLine.split('|')[2]?.trim() ?? 'feature'
+  const category = featureLine.split('|')[3]?.trim() ?? ''
 
   console.log(`\n📦 Day ${targetDay} [${slug}]: ${featureLine.trim()}`)
   progress.currentFeatureDay = targetDay
   progress.currentFeatureRetries = 0
+  progress.currentFeatureName = featureName
   writeProgress(progress)
 
   const buildStart = Date.now()
@@ -196,13 +200,12 @@ async function main() {
   // Always advance to next day regardless of success or failure
   progress.currentDay = targetDay
   progress.currentFeatureDay = null
+  progress.currentFeatureName = null
   progress.currentFeatureRetries = 0
   progress.lastBuildDate = now
   progress.geminiStats = getGeminiStats()
 
   const existing = progress.features.findIndex((f) => f.day === targetDay)
-  const featureName = featureLine.split('|')[2]?.trim() ?? 'feature'
-  const category = featureLine.split('|')[3]?.trim() ?? ''
 
   if (result === 'success') {
     progress.completedFeatures += 1

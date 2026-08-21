@@ -38,10 +38,12 @@ interface AdminStatus {
   startDate: string | null
   daysRemaining: number
   currentFeatureDay: number | null
+  currentFeatureName: string | null
   currentFeatureRetries: number
   rateLimitedUntil: string | null
   apiKeys: { index: number; rateLimitedUntil: string | null }[]
   recentFeatures: Feature[]
+  allFeatures: Feature[]
   geminiStats: GeminiStats | null
 }
 
@@ -58,7 +60,7 @@ function StatusBadge({ status }: { status: string }) {
   }
   return (
     <span className={`px-2 py-0.5 rounded-full text-xs border font-medium ${styles[status] ?? styles.not_started}`}>
-      {status.replace('_', ' ')}
+      {status.replace(/_/g, ' ')}
     </span>
   )
 }
@@ -73,6 +75,24 @@ function StatCard({ label, value, sub }: { label: string; value: string | number
   )
 }
 
+function ProgressRing({ pct, color, size = 80 }: { pct: number; color: string; size?: number }) {
+  const r = (size - 10) / 2
+  const circ = 2 * Math.PI * r
+  const offset = circ - (pct / 100) * circ
+  return (
+    <svg width={size} height={size} className="-rotate-90">
+      <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#27272a" strokeWidth={8} />
+      <circle
+        cx={size / 2} cy={size / 2} r={r} fill="none"
+        stroke={color} strokeWidth={8}
+        strokeDasharray={circ} strokeDashoffset={offset}
+        strokeLinecap="round"
+        style={{ transition: 'stroke-dashoffset 0.7s ease' }}
+      />
+    </svg>
+  )
+}
+
 export default function AdminPage() {
   const [password, setPassword] = useState('')
   const [authed, setAuthed] = useState(false)
@@ -81,19 +101,31 @@ export default function AdminPage() {
   const [loading, setLoading] = useState(false)
   const [actionMsg, setActionMsg] = useState('')
   const [actionLoading, setActionLoading] = useState(false)
+  const [showAllFeatures, setShowAllFeatures] = useState(false)
+  const [deployMsg, setDeployMsg] = useState('')
+  const [deployLoading, setDeployLoading] = useState<'web' | 'api' | null>(null)
 
   const fetchStatus = useCallback(async (pwd: string) => {
     try {
       const res = await fetch(`${API}/admin/status`, {
         headers: { 'x-admin-password': pwd },
       })
-      if (!res.ok) throw new Error('Unauthorized')
+      if (res.status === 401) {
+        setError('Wrong password')
+        setAuthed(false)
+        return
+      }
+      if (!res.ok) {
+        setError(`API error: ${res.status} ${res.statusText}`)
+        setAuthed(false)
+        return
+      }
       const data = await res.json()
       setStatus(data)
       setAuthed(true)
       setError('')
     } catch {
-      setError('Wrong password or API unavailable')
+      setError('Cannot reach API — check CORS or network')
       setAuthed(false)
     }
   }, [])
@@ -107,10 +139,7 @@ export default function AdminPage() {
 
   const handleStart = async () => {
     setActionLoading(true)
-    const res = await fetch(`${API}/admin/start`, {
-      method: 'POST',
-      headers: { 'x-admin-password': password },
-    })
+    const res = await fetch(`${API}/admin/start`, { method: 'POST', headers: { 'x-admin-password': password } })
     const data = await res.json()
     setActionMsg(data.message)
     await fetchStatus(password)
@@ -120,10 +149,7 @@ export default function AdminPage() {
 
   const handleStop = async () => {
     setActionLoading(true)
-    const res = await fetch(`${API}/admin/stop`, {
-      method: 'POST',
-      headers: { 'x-admin-password': password },
-    })
+    const res = await fetch(`${API}/admin/stop`, { method: 'POST', headers: { 'x-admin-password': password } })
     const data = await res.json()
     setActionMsg(data.message)
     await fetchStatus(password)
@@ -131,28 +157,20 @@ export default function AdminPage() {
     setTimeout(() => setActionMsg(''), 6000)
   }
 
-  // Poll every 10 seconds when authed
-  useEffect(() => {
-    if (!authed) return
-    const interval = setInterval(() => fetchStatus(password), 10000)
-    return () => clearInterval(interval)
-  }, [authed, password, fetchStatus])
-
-  const [deployMsg, setDeployMsg] = useState('')
-  const [deployLoading, setDeployLoading] = useState<'web' | 'api' | null>(null)
-
   const handleDeploy = async (target: 'web' | 'api') => {
     setDeployLoading(target)
-    const res = await fetch(`${API}/admin/deploy/${target}`, {
-      method: 'POST',
-      headers: { 'x-admin-password': password },
-    })
+    const res = await fetch(`${API}/admin/deploy/${target}`, { method: 'POST', headers: { 'x-admin-password': password } })
     const data = await res.json()
     setDeployMsg(data.message)
     setDeployLoading(null)
     setTimeout(() => setDeployMsg(''), 8000)
   }
 
+  useEffect(() => {
+    if (!authed) return
+    const interval = setInterval(() => fetchStatus(password), 10000)
+    return () => clearInterval(interval)
+  }, [authed, password, fetchStatus])
 
   const isRunning = status?.status === 'running'
   const isRateLimited = status?.status === 'rate_limited'
@@ -191,98 +209,55 @@ export default function AdminPage() {
     )
   }
 
+  const buildPct = status ? Math.round((status.completedFeatures / status.totalFeatures) * 100) : 0
+  const tokenPct = status?.geminiStats
+    ? Math.min(100, Math.round((status.geminiStats.tokensUsed / status.geminiStats.tokenBudget) * 100))
+    : 0
+  const tokenColor = tokenPct > 80 ? '#ef4444' : tokenPct > 50 ? '#eab308' : '#6366f1'
+
   return (
     <main className="min-h-screen bg-zinc-950 text-zinc-100 p-6">
       <div className="max-w-5xl mx-auto space-y-8">
 
         {/* Header */}
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between flex-wrap gap-3">
           <div>
             <h1 className="text-2xl font-black text-white">Admin Dashboard</h1>
             <p className="text-zinc-500 text-sm">toolbox365 — autonomous builder</p>
           </div>
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => fetchStatus(password)}
-              className="px-4 py-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-sm text-zinc-300 transition-colors"
-            >
+          <div className="flex items-center gap-3 flex-wrap">
+            <button onClick={() => fetchStatus(password)} className="px-4 py-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-sm text-zinc-300 transition-colors">
               ↻ Refresh
             </button>
-            <button
-              onClick={() => handleDeploy('web')}
-              disabled={deployLoading === 'web'}
-              className="px-4 py-2 rounded-lg bg-violet-600 hover:bg-violet-500 text-sm text-white font-medium transition-colors disabled:opacity-50"
-            >
+            <button onClick={() => handleDeploy('web')} disabled={deployLoading === 'web'} className="px-4 py-2 rounded-lg bg-violet-600 hover:bg-violet-500 text-sm text-white font-medium transition-colors disabled:opacity-50">
               {deployLoading === 'web' ? 'Deploying...' : '🌐 Deploy Web'}
             </button>
-            <button
-              onClick={() => handleDeploy('api')}
-              disabled={deployLoading === 'api'}
-              className="px-4 py-2 rounded-lg bg-violet-600 hover:bg-violet-500 text-sm text-white font-medium transition-colors disabled:opacity-50"
-            >
+            <button onClick={() => handleDeploy('api')} disabled={deployLoading === 'api'} className="px-4 py-2 rounded-lg bg-violet-600 hover:bg-violet-500 text-sm text-white font-medium transition-colors disabled:opacity-50">
               {deployLoading === 'api' ? 'Deploying...' : '⚙️ Deploy API'}
             </button>
             {isRunning ? (
-              <button
-                onClick={handleStop}
-                disabled={actionLoading}
-                className="px-5 py-2 rounded-lg bg-red-600 hover:bg-red-500 text-sm text-white font-medium transition-colors disabled:opacity-50 flex items-center gap-2"
-              >
+              <button onClick={handleStop} disabled={actionLoading} className="px-5 py-2 rounded-lg bg-red-600 hover:bg-red-500 text-sm text-white font-medium transition-colors disabled:opacity-50 flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
                 Stop Builder
               </button>
             ) : (
-              <button
-                onClick={handleStart}
-                disabled={actionLoading || status?.status === 'completed'}
-                className="px-5 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-sm text-white font-medium transition-colors disabled:opacity-50"
-              >
+              <button onClick={handleStart} disabled={actionLoading || status?.status === 'completed'} className="px-5 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-sm text-white font-medium transition-colors disabled:opacity-50">
                 ▶ Start Builder
               </button>
             )}
           </div>
         </div>
 
-        {/* Deploy message */}
-        {deployMsg && (
-          <div className="rounded-xl border border-violet-500/20 bg-violet-500/10 p-4 text-violet-300 text-sm">
-            {deployMsg}
-          </div>
-        )}
-
-        {/* Action message */}
-        {actionMsg && (
-          <div className="rounded-xl border border-indigo-500/20 bg-indigo-500/10 p-4 text-indigo-300 text-sm">
-            {actionMsg}
-          </div>
-        )}
+        {deployMsg && <div className="rounded-xl border border-violet-500/20 bg-violet-500/10 p-4 text-violet-300 text-sm">{deployMsg}</div>}
+        {actionMsg && <div className="rounded-xl border border-indigo-500/20 bg-indigo-500/10 p-4 text-indigo-300 text-sm">{actionMsg}</div>}
 
         {/* Rate limit warning */}
         {isRateLimited && status?.rateLimitedUntil && (
           <div className="rounded-xl border border-yellow-500/20 bg-yellow-500/10 p-4 text-yellow-300 text-sm space-y-2">
             <div className="flex items-center gap-3">
               <span>⏳</span>
-              <span>
-                All Gemini API keys rate limited. Builder will auto-resume at{' '}
-                <strong>{new Date(status.rateLimitedUntil).toLocaleString()}</strong>
-              </span>
+              <span>All Gemini API keys rate limited. Builder will auto-resume at <strong>{new Date(status.rateLimitedUntil).toLocaleString()}</strong></span>
             </div>
-            {status.apiKeys.length > 0 && (
-              <div className="flex gap-3 pl-6">
-                {status.apiKeys.map((k) => (
-                  <span
-                    key={k.index}
-                    className={`px-2 py-0.5 rounded-full text-xs border font-medium ${
-                      k.rateLimitedUntil
-                        ? 'bg-red-500/10 text-red-400 border-red-500/20'
-                        : 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
-                    }`}
-                  >
-                    Key {k.index + 1}: {k.rateLimitedUntil ? 'limited' : 'ok'}
-                  </span>
-                ))}
-              </div>
-            )}
           </div>
         )}
 
@@ -292,9 +267,7 @@ export default function AdminPage() {
             <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse flex-shrink-0" />
             <span>
               Building Day <strong>{status.currentFeatureDay}</strong>
-              {status.currentFeatureRetries > 0 && (
-                <> — retry {status.currentFeatureRetries} / 5</>
-              )}
+              {status.currentFeatureName && <> — <strong>{status.currentFeatureName}</strong></>}
             </span>
           </div>
         )}
@@ -303,138 +276,114 @@ export default function AdminPage() {
           <>
             {/* Stats Grid */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <StatCard label="Status" value={status.status.replace('_', ' ')} sub={isRunning ? 'Active on GitHub Actions' : undefined} />
+              <StatCard label="Status" value={status.status.replace(/_/g, ' ')} sub={isRunning ? 'Active on GitHub Actions' : undefined} />
               <StatCard label="Features Built" value={`${status.completedFeatures} / ${status.totalFeatures}`} sub={`${status.successRate}% success rate`} />
               <StatCard label="🔥 Streak" value={status.streak} sub="consecutive days" />
               <StatCard label="Failed Attempts" value={status.failedAttempts} sub="total build failures" />
             </div>
 
-            {/* Gemini API Usage */}
-            <div className="rounded-2xl border border-zinc-800 bg-zinc-900 p-6 space-y-4">
-              <div className="flex items-center justify-between">
-                <h2 className="text-zinc-400 text-xs uppercase tracking-widest">Gemini API Usage</h2>
-                <span className="text-zinc-600 text-xs">per GitHub Actions run</span>
-              </div>
-              {status.geminiStats ? (
-                <>
-                  <div className="space-y-2">
-                    <div className="flex justify-between text-sm">
-                      <span className="text-zinc-400">Token Budget</span>
-                      <span className="text-zinc-300">
-                        ~{status.geminiStats.tokensUsed.toLocaleString()} / {status.geminiStats.tokenBudget.toLocaleString()}
-                      </span>
-                    </div>
-                    <div className="h-2 rounded-full bg-zinc-800 overflow-hidden">
-                      <div
-                        className={`h-full rounded-full transition-all duration-700 ${
-                          status.geminiStats.tokensUsed / status.geminiStats.tokenBudget > 0.8
-                            ? 'bg-red-500'
-                            : status.geminiStats.tokensUsed / status.geminiStats.tokenBudget > 0.5
-                            ? 'bg-yellow-500'
-                            : 'bg-indigo-500'
-                        }`}
-                        style={{ width: `${Math.min(100, (status.geminiStats.tokensUsed / status.geminiStats.tokenBudget) * 100)}%` }}
-                      />
-                    </div>
-                    <p className="text-zinc-600 text-xs">
-                      ~{status.geminiStats.tokenBudgetRemaining.toLocaleString()} tokens remaining
-                    </p>
-                  </div>
-                  <div className="grid grid-cols-3 gap-3">
-                    <div className="rounded-xl bg-zinc-800/50 p-3 text-center">
-                      <p className="text-xl font-bold text-white">{status.geminiStats.totalCalls}</p>
-                      <p className="text-zinc-500 text-xs mt-0.5">API Calls</p>
-                    </div>
-                    <div className="rounded-xl bg-zinc-800/50 p-3 text-center">
-                      <p className="text-xl font-bold text-white">~{status.geminiStats.totalInputTokens.toLocaleString()}</p>
-                      <p className="text-zinc-500 text-xs mt-0.5">Input Tokens</p>
-                    </div>
-                    <div className="rounded-xl bg-zinc-800/50 p-3 text-center">
-                      <p className="text-xl font-bold text-white">~{status.geminiStats.totalOutputTokens.toLocaleString()}</p>
-                      <p className="text-zinc-500 text-xs mt-0.5">Output Tokens</p>
-                    </div>
-                  </div>
-                </>
-              ) : (
-                <p className="text-zinc-600 text-sm py-4 text-center">No data yet — stats appear after the first build run.</p>
-              )}
+            {/* Progress + Token rings */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-              {/* API Key Health — always visible */}
-              {status.apiKeys.length > 0 && (
-                <div className="pt-2 border-t border-zinc-800 space-y-2">
-                  <p className="text-zinc-500 text-xs uppercase tracking-widest">API Key Health</p>
-                  <div className="flex gap-2">
-                    {status.apiKeys.map((k) => (
-                      <div
-                        key={k.index}
-                        className={`flex-1 rounded-lg p-3 border text-center ${
-                          k.rateLimitedUntil
-                            ? 'bg-red-500/10 border-red-500/20'
-                            : 'bg-emerald-500/10 border-emerald-500/20'
-                        }`}
-                      >
-                        <p className={`text-sm font-medium ${
-                          k.rateLimitedUntil ? 'text-red-400' : 'text-emerald-400'
-                        }`}>
-                          Key {k.index + 1}
-                        </p>
-                        <p className={`text-xs mt-0.5 ${
-                          k.rateLimitedUntil ? 'text-red-500' : 'text-emerald-600'
-                        }`}>
-                          {k.rateLimitedUntil
-                            ? `limited until ${new Date(k.rateLimitedUntil).toLocaleTimeString()}`
-                            : 'healthy'}
-                        </p>
-                      </div>
-                    ))}
+              {/* Build Progress */}
+              <div className="rounded-2xl border border-zinc-800 bg-zinc-900 p-6 flex items-center gap-6">
+                <div className="relative flex-shrink-0">
+                  <ProgressRing pct={buildPct} color="#6366f1" size={88} />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="text-white font-bold text-lg">{buildPct}%</span>
                   </div>
                 </div>
-              )}
+                <div className="flex-1 space-y-2">
+                  <p className="text-zinc-400 text-xs uppercase tracking-widest">Build Progress</p>
+                  <p className="text-white text-2xl font-bold">{status.completedFeatures} <span className="text-zinc-500 text-base font-normal">/ {status.totalFeatures} features</span></p>
+                  <div className="h-2 rounded-full bg-zinc-800 overflow-hidden">
+                    <div className="h-full rounded-full bg-indigo-500 transition-all duration-700" style={{ width: `${buildPct}%` }} />
+                  </div>
+                  <p className="text-zinc-600 text-xs">{status.daysRemaining} days remaining</p>
+                </div>
+              </div>
+
+              {/* Gemini Token Usage */}
+              <div className="rounded-2xl border border-zinc-800 bg-zinc-900 p-6 flex items-center gap-6">
+                <div className="relative flex-shrink-0">
+                  <ProgressRing pct={tokenPct} color={tokenColor} size={88} />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="text-white font-bold text-lg">{tokenPct}%</span>
+                  </div>
+                </div>
+                <div className="flex-1 space-y-2">
+                  <p className="text-zinc-400 text-xs uppercase tracking-widest">Gemini Token Budget</p>
+                  {status.geminiStats ? (
+                    <>
+                      <p className="text-white text-2xl font-bold">
+                        ~{status.geminiStats.tokensUsed.toLocaleString()}
+                        <span className="text-zinc-500 text-base font-normal"> / {status.geminiStats.tokenBudget.toLocaleString()}</span>
+                      </p>
+                      <div className="h-2 rounded-full bg-zinc-800 overflow-hidden">
+                        <div
+                          className="h-full rounded-full transition-all duration-700"
+                          style={{ width: `${tokenPct}%`, backgroundColor: tokenColor }}
+                        />
+                      </div>
+                      <div className="flex gap-4 text-xs text-zinc-500">
+                        <span>{status.geminiStats.totalCalls} calls</span>
+                        <span>~{status.geminiStats.totalInputTokens.toLocaleString()} in</span>
+                        <span>~{status.geminiStats.totalOutputTokens.toLocaleString()} out</span>
+                      </div>
+                    </>
+                  ) : (
+                    <p className="text-zinc-600 text-sm">No data yet — appears after first build run.</p>
+                  )}
+                </div>
+              </div>
             </div>
 
-            {/* Progress Bar */}
-            <div className="rounded-2xl border border-zinc-800 bg-zinc-900 p-6 space-y-3">
-              <div className="flex justify-between text-sm">
-                <span className="text-zinc-400">Overall Progress</span>
-                <span className="text-zinc-400">{status.completedFeatures} / {status.totalFeatures}</span>
+            {/* API Key Health */}
+            {status.apiKeys.length > 0 && (
+              <div className="rounded-2xl border border-zinc-800 bg-zinc-900 p-6 space-y-3">
+                <p className="text-zinc-400 text-xs uppercase tracking-widest">API Key Health</p>
+                <div className="flex gap-3">
+                  {status.apiKeys.map((k) => (
+                    <div key={k.index} className={`flex-1 rounded-lg p-3 border text-center ${k.rateLimitedUntil ? 'bg-red-500/10 border-red-500/20' : 'bg-emerald-500/10 border-emerald-500/20'}`}>
+                      <p className={`text-sm font-medium ${k.rateLimitedUntil ? 'text-red-400' : 'text-emerald-400'}`}>Key {k.index + 1}</p>
+                      <p className={`text-xs mt-0.5 ${k.rateLimitedUntil ? 'text-red-500' : 'text-emerald-600'}`}>
+                        {k.rateLimitedUntil ? `limited until ${new Date(k.rateLimitedUntil).toLocaleTimeString()}` : 'healthy'}
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
-              <div className="h-3 rounded-full bg-zinc-800 overflow-hidden">
-                <div
-                  className="h-full rounded-full bg-indigo-500 transition-all duration-700"
-                  style={{ width: `${(status.completedFeatures / status.totalFeatures) * 100}%` }}
-                />
-              </div>
-              <div className="flex justify-between text-xs text-zinc-600">
-                <span>Started: {status.startDate ? new Date(status.startDate).toLocaleDateString() : '—'}</span>
-                <span>Last build: {status.lastBuildDate ? new Date(status.lastBuildDate).toLocaleString() : '—'}</span>
-                <span>Status: <StatusBadge status={status.lastBuildStatus ?? 'not_started'} /></span>
-              </div>
-            </div>
+            )}
 
-            {/* Recent Builds */}
+            {/* All Features List */}
             <div className="rounded-2xl border border-zinc-800 bg-zinc-900 p-6">
-              <h2 className="text-zinc-400 text-xs uppercase tracking-widest mb-4">Recent Builds</h2>
-              {status.recentFeatures.length === 0 ? (
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-zinc-400 text-xs uppercase tracking-widest">
+                  Features {status.allFeatures?.length > 0 && `(${status.allFeatures.length} built)`}
+                </h2>
+                {status.allFeatures?.length > 5 && (
+                  <button onClick={() => setShowAllFeatures(!showAllFeatures)} className="text-xs text-indigo-400 hover:text-indigo-300 transition-colors">
+                    {showAllFeatures ? 'Show less ↑' : `Show all ${status.allFeatures.length} ↓`}
+                  </button>
+                )}
+              </div>
+              {!status.allFeatures?.length ? (
                 <p className="text-zinc-600 text-sm text-center py-8">No builds yet. Press Start to begin.</p>
               ) : (
-                <div className="space-y-2">
-                  {status.recentFeatures.map((f) => (
-                    <div key={f.day} className="flex items-center justify-between py-3 border-b border-zinc-800 last:border-0">
-                      <div className="flex items-center gap-4">
-                        <span className="text-zinc-600 text-xs font-mono w-12">Day {String(f.day).padStart(3, '0')}</span>
-                        <span className="text-zinc-200 text-sm">{f.name.split('|')[2]?.trim() ?? f.name}</span>
+                <div className="space-y-1">
+                  {(showAllFeatures ? status.allFeatures : status.allFeatures.slice(0, 10)).map((f) => (
+                    <div key={f.day} className="flex items-center justify-between py-2.5 border-b border-zinc-800/60 last:border-0">
+                      <div className="flex items-center gap-3 min-w-0">
+                        <span className="text-zinc-600 text-xs font-mono w-14 flex-shrink-0">Day {String(f.day).padStart(3, '0')}</span>
+                        <span className="text-zinc-200 text-sm truncate">{f.name.split('|')[2]?.trim() ?? f.name}</span>
+                        {f.name.split('|')[3]?.trim() && (
+                          <span className="text-zinc-600 text-xs hidden md:inline flex-shrink-0">{f.name.split('|')[3].trim()}</span>
+                        )}
                       </div>
-                      <div className="flex items-center gap-4">
-                        {f.retries != null && f.retries > 0 && (
-                          <span className="text-zinc-600 text-xs">{f.retries} retries</span>
-                        )}
-                        {f.duration != null && (
-                          <span className="text-zinc-600 text-xs">{f.duration}s</span>
-                        )}
-                        {f.tokensUsed != null && (
-                          <span className="text-zinc-600 text-xs">~{f.tokensUsed.toLocaleString()} tok</span>
-                        )}
-                        <span className="text-zinc-600 text-xs">{new Date(f.date).toLocaleDateString()}</span>
+                      <div className="flex items-center gap-3 flex-shrink-0 ml-3">
+                        {f.duration != null && <span className="text-zinc-600 text-xs">{f.duration}s</span>}
+                        {f.tokensUsed != null && <span className="text-zinc-600 text-xs hidden sm:inline">~{f.tokensUsed.toLocaleString()} tok</span>}
+                        <span className="text-zinc-600 text-xs hidden sm:inline">{new Date(f.date).toLocaleDateString()}</span>
                         <StatusBadge status={f.status} />
                       </div>
                     </div>
@@ -453,13 +402,7 @@ export default function AdminPage() {
                   { label: '🚀 Vercel Dashboard', url: 'https://vercel.com/dashboard' },
                   { label: '🤖 Gemini Console', url: 'https://aistudio.google.com' },
                 ].map((link) => (
-                  <a
-                    key={link.url}
-                    href={link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="rounded-xl bg-zinc-800 hover:bg-zinc-700 p-4 text-sm text-zinc-300 transition-colors text-center"
-                  >
+                  <a key={link.url} href={link.url} target="_blank" rel="noopener noreferrer" className="rounded-xl bg-zinc-800 hover:bg-zinc-700 p-4 text-sm text-zinc-300 transition-colors text-center">
                     {link.label}
                   </a>
                 ))}

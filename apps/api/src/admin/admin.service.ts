@@ -77,6 +77,9 @@ export class AdminService {
         rateLimitedUntil: progress.rateLimitedUntil ?? null,
         apiKeys: progress.apiKeys ?? [],
         recentFeatures: sorted.slice(0, 10),
+        allFeatures: sorted,
+        geminiStats: progress.geminiStats ?? null,
+        currentFeatureName: progress.currentFeatureName ?? null,
       }
     } catch {
       return {
@@ -96,6 +99,9 @@ export class AdminService {
         rateLimitedUntil: null,
         apiKeys: [],
         recentFeatures: [],
+        allFeatures: [],
+        geminiStats: null,
+        currentFeatureName: null,
       }
     }
   }
