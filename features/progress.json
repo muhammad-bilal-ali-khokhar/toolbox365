@@ -1,10 +1,10 @@
 {
   "status": "running",
-  "currentDay": 298,
+  "currentDay": 299,
   "totalFeatures": 365,
   "completedFeatures": 0,
-  "failedAttempts": 298,
-  "lastBuildDate": "2026-08-21T11:14:24.814Z",
+  "failedAttempts": 299,
+  "lastBuildDate": "2026-08-21T11:14:38.279Z",
   "lastBuildStatus": "failed",
   "startDate": "2026-08-21T09:30:47.593Z",
   "currentFeatureDay": null,
@@ -2690,6 +2690,15 @@
       "name": "| 298 | Pythagorean Theorem | Math | Solve Pythagorean theorem | pending |",
       "status": "failed",
       "date": "2026-08-21T11:14:24.814Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 54525
+    },
+    {
+      "day": 299,
+      "name": "| 299 | BMI Calculator | Math | Calculate Body Mass Index | pending |",
+      "status": "failed",
+      "date": "2026-08-21T11:14:38.279Z",
       "retries": 5,
       "duration": 0,
       "tokensUsed": 54525
