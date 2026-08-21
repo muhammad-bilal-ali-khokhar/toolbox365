@@ -1,10 +1,10 @@
 {
   "status": "running",
-  "currentDay": 337,
+  "currentDay": 338,
   "totalFeatures": 365,
   "completedFeatures": 0,
-  "failedAttempts": 337,
-  "lastBuildDate": "2026-08-21T11:23:11.370Z",
+  "failedAttempts": 338,
+  "lastBuildDate": "2026-08-21T11:23:24.813Z",
   "lastBuildStatus": "failed",
   "startDate": "2026-08-21T09:30:47.593Z",
   "currentFeatureDay": null,
@@ -3041,6 +3041,15 @@
       "name": "| 337 | Image Resizer | File | Resize images to specific dimensions | pending |",
       "status": "failed",
       "date": "2026-08-21T11:23:11.370Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 54525
+    },
+    {
+      "day": 338,
+      "name": "| 338 | Image Cropper | File | Crop images to a selection | pending |",
+      "status": "failed",
+      "date": "2026-08-21T11:23:24.813Z",
       "retries": 5,
       "duration": 0,
       "tokensUsed": 54525
