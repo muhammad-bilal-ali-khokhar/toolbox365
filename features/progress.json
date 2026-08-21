@@ -1,10 +1,10 @@
 {
   "status": "running",
-  "currentDay": 185,
+  "currentDay": 186,
   "totalFeatures": 365,
   "completedFeatures": 0,
-  "failedAttempts": 185,
-  "lastBuildDate": "2026-08-21T10:49:02.472Z",
+  "failedAttempts": 186,
+  "lastBuildDate": "2026-08-21T10:49:16.228Z",
   "lastBuildStatus": "failed",
   "startDate": "2026-08-21T09:30:47.593Z",
   "currentFeatureDay": null,
@@ -1673,6 +1673,15 @@
       "name": "| 185 | Emoji Picker | Text | Browse and copy emoji characters | pending |",
       "status": "failed",
       "date": "2026-08-21T10:49:02.472Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 54525
+    },
+    {
+      "day": 186,
+      "name": "| 186 | Special Characters | Text | Browse and copy special characters | pending |",
+      "status": "failed",
+      "date": "2026-08-21T10:49:16.228Z",
       "retries": 5,
       "duration": 0,
       "tokensUsed": 54525
