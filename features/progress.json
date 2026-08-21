@@ -1,10 +1,10 @@
 {
   "status": "running",
-  "currentDay": 129,
+  "currentDay": 130,
   "totalFeatures": 365,
   "completedFeatures": 0,
-  "failedAttempts": 129,
-  "lastBuildDate": "2026-08-21T10:36:24.704Z",
+  "failedAttempts": 130,
+  "lastBuildDate": "2026-08-21T10:36:37.976Z",
   "lastBuildStatus": "failed",
   "startDate": "2026-08-21T09:30:47.593Z",
   "currentFeatureDay": null,
@@ -1169,6 +1169,15 @@
       "name": "| 129 | Learning Tracker | Productivity | Track courses and learning progress | pending |",
       "status": "failed",
       "date": "2026-08-21T10:36:24.704Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 54525
+    },
+    {
+      "day": 130,
+      "name": "| 130 | Reading List | Productivity | Manage your reading list | pending |",
+      "status": "failed",
+      "date": "2026-08-21T10:36:37.976Z",
       "retries": 5,
       "duration": 0,
       "tokensUsed": 54525
