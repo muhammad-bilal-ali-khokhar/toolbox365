@@ -1,10 +1,10 @@
 {
   "status": "running",
-  "currentDay": 154,
+  "currentDay": 155,
   "totalFeatures": 365,
   "completedFeatures": 0,
-  "failedAttempts": 154,
-  "lastBuildDate": "2026-08-21T10:42:01.835Z",
+  "failedAttempts": 155,
+  "lastBuildDate": "2026-08-21T10:42:15.333Z",
   "lastBuildStatus": "failed",
   "startDate": "2026-08-21T09:30:47.593Z",
   "currentFeatureDay": null,
@@ -1394,6 +1394,15 @@
       "name": "| 154 | Extract URLs | Text | Extract all URLs from text | pending |",
       "status": "failed",
       "date": "2026-08-21T10:42:01.835Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 54525
+    },
+    {
+      "day": 155,
+      "name": "| 155 | Extract Numbers | Text | Extract all numbers from text | pending |",
+      "status": "failed",
+      "date": "2026-08-21T10:42:15.333Z",
       "retries": 5,
       "duration": 0,
       "tokensUsed": 54525
