@@ -1,10 +1,10 @@
 {
   "status": "running",
-  "currentDay": 152,
+  "currentDay": 153,
   "totalFeatures": 365,
   "completedFeatures": 0,
-  "failedAttempts": 152,
-  "lastBuildDate": "2026-08-21T10:41:34.863Z",
+  "failedAttempts": 153,
+  "lastBuildDate": "2026-08-21T10:41:48.302Z",
   "lastBuildStatus": "failed",
   "startDate": "2026-08-21T09:30:47.593Z",
   "currentFeatureDay": null,
@@ -1376,6 +1376,15 @@
       "name": "| 152 | Find and Replace | Text | Find and replace text with regex support | pending |",
       "status": "failed",
       "date": "2026-08-21T10:41:34.863Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 54525
+    },
+    {
+      "day": 153,
+      "name": "| 153 | Extract Emails | Text | Extract all email addresses from text | pending |",
+      "status": "failed",
+      "date": "2026-08-21T10:41:48.302Z",
       "retries": 5,
       "duration": 0,
       "tokensUsed": 54525
