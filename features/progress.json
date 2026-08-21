@@ -1,10 +1,10 @@
 {
   "status": "running",
-  "currentDay": 1,
+  "currentDay": 2,
   "totalFeatures": 365,
   "completedFeatures": 0,
-  "failedAttempts": 1,
-  "lastBuildDate": "2026-08-21T15:59:26.281Z",
+  "failedAttempts": 2,
+  "lastBuildDate": "2026-08-21T18:19:14.201Z",
   "lastBuildStatus": "failed",
   "startDate": "2026-08-21T15:30:14.697Z",
   "currentFeatureDay": null,
@@ -29,16 +29,25 @@
       "retries": 0,
       "duration": 54,
       "tokensUsed": 6856
+    },
+    {
+      "day": 2,
+      "name": "| 002 | JSON Validator | Developer | Validate JSON and show errors | pending |",
+      "status": "failed",
+      "date": "2026-08-21T18:19:14.201Z",
+      "retries": 0,
+      "duration": 49,
+      "tokensUsed": 8855
     }
   ],
   "currentFeatureName": null,
   "geminiStats": {
-    "tokensUsed": 6856,
+    "tokensUsed": 8855,
     "tokenBudget": 50000,
-    "tokenBudgetRemaining": 43144,
+    "tokenBudgetRemaining": 41145,
     "totalCalls": 1,
-    "totalInputTokens": 2021,
-    "totalOutputTokens": 4835,
+    "totalInputTokens": 2717,
+    "totalOutputTokens": 6138,
     "rateLimitedKeys": 0,
     "totalKeys": 2
   }
