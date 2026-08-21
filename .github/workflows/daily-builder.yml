@@ -1,0 +1,80 @@
+name: Daily Builder
+
+on:
+  schedule:
+    - cron: '0 22 * * *'
+    - cron: '0 10 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: builder
+  cancel-in-progress: false
+
+jobs:
+  build-feature:
+    name: Build Features
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Check builder status
+        id: check
+        run: |
+          STATUS=$(node -e "const p=require('./features/progress.json'); console.log(p.status)")
+          echo "status=$STATUS" >> $GITHUB_OUTPUT
+          echo "Builder status: $STATUS"
+
+          if [ "$STATUS" = "stopped" ]; then
+            echo "should_run=false" >> $GITHUB_OUTPUT
+            echo "Builder is stopped. Skipping."
+            exit 0
+          fi
+
+          if [ "$STATUS" = "completed" ]; then
+            echo "should_run=false" >> $GITHUB_OUTPUT
+            echo "All 365 features complete!"
+            exit 0
+          fi
+
+          if [ "$STATUS" = "rate_limited" ]; then
+            UNTIL=$(node -e "const p=require('./features/progress.json'); console.log(p.rateLimitedUntil ?? '')")
+            if [ -n "$UNTIL" ]; then
+              NOW=$(date -u +%s)
+              UNTIL_TS=$(python3 -c "import datetime; print(int(datetime.datetime.fromisoformat('${UNTIL}'.replace('Z','+00:00')).timestamp()))" 2>/dev/null || echo 0)
+              if [ "$NOW" -lt "$UNTIL_TS" ]; then
+                echo "should_run=false" >> $GITHUB_OUTPUT
+                echo "Rate limited until $UNTIL. Skipping."
+                exit 0
+              fi
+            fi
+          fi
+
+          echo "should_run=true" >> $GITHUB_OUTPUT
+
+      - name: Install dependencies
+        if: steps.check.outputs.should_run == 'true'
+        run: npm ci
+
+      - name: Install agent dependencies
+        if: steps.check.outputs.should_run == 'true'
+        run: npm install @google/generative-ai tsx --no-save
+
+      - name: Run builder
+        if: steps.check.outputs.should_run == 'true'
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_API_KEY_2: ${{ secrets.GEMINI_API_KEY_2 }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx tsx scripts/agent/builder.ts

@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/index.ts",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "api/index.ts"
+    }
+  ],
+  "ignoreCommand": "git log -1 --pretty=%B | grep -qE '^(feat|chore|fix): day|chore: builder|chore: rate limited|chore: all'"
+}

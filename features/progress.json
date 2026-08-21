@@ -1,0 +1,980 @@
+{
+  "status": "running",
+  "currentDay": 106,
+  "totalFeatures": 365,
+  "completedFeatures": 0,
+  "failedAttempts": 106,
+  "lastBuildDate": "2026-08-21T09:56:33.391Z",
+  "lastBuildStatus": "failed",
+  "startDate": "2026-08-21T09:30:47.593Z",
+  "currentFeatureDay": null,
+  "currentFeatureRetries": 0,
+  "rateLimitedUntil": null,
+  "apiKeys": [],
+  "features": [
+    {
+      "day": 1,
+      "name": "| 001 | JSON Formatter | Developer | Format and prettify JSON input | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:31:00.543Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 2,
+      "name": "| 002 | JSON Validator | Developer | Validate JSON and show errors | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:31:14.989Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 3,
+      "name": "| 003 | JSON Minifier | Developer | Minify JSON by removing whitespace | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:31:29.453Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 4,
+      "name": "| 004 | UUID Generator | Developer | Generate UUID v4 strings | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:31:43.693Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 5,
+      "name": "| 005 | Password Generator | Developer | Generate secure random passwords | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:31:57.849Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 6,
+      "name": "| 006 | Base64 Encoder | Developer | Encode text to Base64 | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:32:12.202Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 7,
+      "name": "| 007 | Base64 Decoder | Developer | Decode Base64 to text | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:32:26.352Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 8,
+      "name": "| 008 | URL Encoder | Developer | Encode special characters in URLs | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:32:40.530Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 9,
+      "name": "| 009 | URL Decoder | Developer | Decode URL-encoded strings | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:32:54.823Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 10,
+      "name": "| 010 | Hash Generator | Developer | Generate MD5, SHA1, SHA256 hashes | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:33:09.310Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 11,
+      "name": "| 011 | JWT Decoder | Developer | Decode and inspect JWT tokens | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:33:23.525Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 12,
+      "name": "| 012 | Regex Tester | Developer | Test regular expressions with live matches | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:33:37.783Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 13,
+      "name": "| 013 | Cron Expression Generator | Developer | Build and explain cron expressions | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:33:52.309Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 14,
+      "name": "| 014 | SQL Formatter | Developer | Format and prettify SQL queries | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:34:06.625Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 15,
+      "name": "| 015 | Color Converter | Developer | Convert between HEX, RGB, HSL | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:34:20.757Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 16,
+      "name": "| 016 | Timestamp Converter | Developer | Convert Unix timestamps to dates | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:34:35.142Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 17,
+      "name": "| 017 | Diff Viewer | Developer | Show line-by-line text differences | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:34:49.229Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 18,
+      "name": "| 018 | YAML Validator | Developer | Validate YAML syntax | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:35:03.500Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 19,
+      "name": "| 019 | YAML to JSON | Developer | Convert YAML to JSON | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:35:17.771Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 20,
+      "name": "| 020 | JSON to YAML | Developer | Convert JSON to YAML | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:35:32.218Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 21,
+      "name": "| 021 | XML Formatter | Developer | Format and prettify XML | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:35:46.623Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 22,
+      "name": "| 022 | XML Validator | Developer | Validate XML syntax | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:36:01.034Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 23,
+      "name": "| 023 | CSV Parser | Developer | Parse CSV and display as table | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:36:15.496Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 24,
+      "name": "| 024 | CSV to JSON | Developer | Convert CSV data to JSON | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:36:29.872Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 25,
+      "name": "| 025 | JSON to CSV | Developer | Convert JSON array to CSV | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:36:44.163Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 26,
+      "name": "| 026 | HTML Encoder | Developer | Encode HTML special characters | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:36:58.539Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 27,
+      "name": "| 027 | HTML Decoder | Developer | Decode HTML entities | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:37:12.869Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 28,
+      "name": "| 028 | HTML Formatter | Developer | Format and prettify HTML | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:37:27.092Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 29,
+      "name": "| 029 | HTML Minifier | Developer | Minify HTML markup | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:37:41.402Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 30,
+      "name": "| 030 | CSS Formatter | Developer | Format and prettify CSS | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:37:55.784Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 31,
+      "name": "| 031 | CSS Minifier | Developer | Minify CSS code | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:38:10.172Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 32,
+      "name": "| 032 | JavaScript Formatter | Developer | Format JavaScript code | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:38:24.572Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 33,
+      "name": "| 033 | JavaScript Minifier | Developer | Minify JavaScript code | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:38:38.852Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 34,
+      "name": "| 034 | Markdown Preview | Developer | Live preview Markdown as HTML | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:38:53.454Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 35,
+      "name": "| 035 | HTTP Status Codes | Developer | Reference list of HTTP status codes | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:39:07.990Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 36,
+      "name": "| 036 | MIME Types Reference | Developer | Searchable MIME types list | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:39:22.388Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 37,
+      "name": "| 037 | IP Address Info | Developer | Get info about an IP address | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:39:36.569Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 38,
+      "name": "| 038 | User Agent Parser | Developer | Parse browser user agent strings | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:39:50.758Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 39,
+      "name": "| 039 | Number Base Converter | Developer | Convert between binary, octal, decimal, hex | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:40:04.862Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 40,
+      "name": "| 040 | Bitwise Calculator | Developer | Perform bitwise operations | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:40:18.973Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 41,
+      "name": "| 041 | ASCII Table | Developer | Full ASCII character reference table | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:40:33.997Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 42,
+      "name": "| 042 | Unicode Lookup | Developer | Look up Unicode characters by code | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:40:48.289Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 43,
+      "name": "| 043 | Escape String | Developer | Escape special characters in strings | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:41:02.678Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 44,
+      "name": "| 044 | Unescape String | Developer | Unescape escaped string characters | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:41:17.281Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 45,
+      "name": "| 045 | JWT Generator | Developer | Generate signed JWT tokens | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:41:31.543Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 46,
+      "name": "| 046 | RSA Key Generator | Developer | Generate RSA public/private key pairs | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:41:45.770Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 47,
+      "name": "| 047 | HMAC Generator | Developer | Generate HMAC signatures | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:42:00.216Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 48,
+      "name": "| 048 | Bcrypt Hash | Developer | Hash passwords using bcrypt | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:42:14.589Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 49,
+      "name": "| 049 | Color Palette from Image | Developer | Extract color palette from an image URL | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:42:29.472Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 50,
+      "name": "| 050 | Pixel to REM Converter | Developer | Convert px values to rem | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:42:44.140Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 51,
+      "name": "| 051 | REM to Pixel Converter | Developer | Convert rem values to px | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:42:58.625Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 52,
+      "name": "| 052 | Tailwind Class Reference | Developer | Searchable Tailwind CSS class reference | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:43:13.329Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 53,
+      "name": "| 053 | Git Command Reference | Developer | Searchable Git commands cheat sheet | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:43:28.333Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 54,
+      "name": "| 054 | Docker Command Reference | Developer | Searchable Docker commands cheat sheet | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:43:43.184Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 55,
+      "name": "| 055 | Linux Command Reference | Developer | Searchable Linux commands cheat sheet | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:43:58.221Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 56,
+      "name": "| 056 | NPM Command Reference | Developer | Searchable NPM commands cheat sheet | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:44:12.742Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 57,
+      "name": "| 057 | Environment Variable Validator | Developer | Validate .env file format | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:44:27.196Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 58,
+      "name": "| 058 | Semver Validator | Developer | Validate semantic version strings | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:44:41.831Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 59,
+      "name": "| 059 | Semver Comparator | Developer | Compare two semver versions | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:44:56.838Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 60,
+      "name": "| 060 | Package.json Validator | Developer | Validate package.json structure | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:45:11.354Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 61,
+      "name": "| 061 | OpenAPI Validator | Developer | Validate OpenAPI/Swagger YAML or JSON | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:45:26.347Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 62,
+      "name": "| 062 | GraphQL Query Formatter | Developer | Format GraphQL queries | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:45:41.585Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 63,
+      "name": "| 063 | SQL to JSON | Developer | Convert SQL SELECT result to JSON | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:45:56.428Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 64,
+      "name": "| 064 | Markdown to HTML | Developer | Convert Markdown to HTML | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:46:11.217Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 65,
+      "name": "| 065 | HTML to Markdown | Developer | Convert HTML to Markdown | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:46:25.999Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 66,
+      "name": "| 066 | String Interpolation Tester | Developer | Test template literal expressions | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:46:40.553Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 67,
+      "name": "| 067 | JSON Path Tester | Developer | Test JSONPath expressions | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:46:54.899Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 68,
+      "name": "| 068 | XPath Tester | Developer | Test XPath expressions on XML | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:47:09.606Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 69,
+      "name": "| 069 | Webhook Tester | Developer | Send test webhook payloads | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:47:24.418Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 70,
+      "name": "| 070 | API Response Formatter | Developer | Format and inspect API responses | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:47:39.934Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 71,
+      "name": "| 071 | CORS Header Checker | Developer | Check CORS headers for a URL | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:47:54.542Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 72,
+      "name": "| 072 | SSL Certificate Checker | Developer | Check SSL certificate details | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:48:09.273Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 73,
+      "name": "| 073 | DNS Lookup | Developer | Perform DNS lookups | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:48:23.960Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 74,
+      "name": "| 074 | Ping Tool | Developer | Ping a hostname or IP | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:48:38.292Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 75,
+      "name": "| 075 | Port Scanner | Developer | Check if a port is open | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:48:53.476Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 76,
+      "name": "| 076 | URL Parser | Developer | Parse URL into components | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:49:08.435Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 77,
+      "name": "| 077 | Query String Builder | Developer | Build URL query strings | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:49:23.171Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 78,
+      "name": "| 078 | Robots.txt Generator | Developer | Generate robots.txt files | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:49:38.223Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 79,
+      "name": "| 079 | Sitemap Generator | Developer | Generate XML sitemaps | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:49:52.902Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 80,
+      "name": "| 080 | .gitignore Generator | Developer | Generate .gitignore for any stack | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:50:07.298Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 81,
+      "name": "| 081 | Pomodoro Timer | Productivity | 25/5 minute focus timer | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:50:21.906Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 82,
+      "name": "| 082 | Stopwatch | Productivity | Precise stopwatch with lap times | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:50:36.271Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 83,
+      "name": "| 083 | Countdown Timer | Productivity | Set a countdown to any time | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:50:50.947Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 84,
+      "name": "| 084 | World Clock | Productivity | Show current time in multiple timezones | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:51:05.959Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 85,
+      "name": "| 085 | Meeting Timer | Productivity | Track meeting duration and cost | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:51:20.295Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 86,
+      "name": "| 086 | Focus Timer | Productivity | Customizable deep work timer | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:51:35.234Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 87,
+      "name": "| 087 | To-Do List | Productivity | Simple task list with completion tracking | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:51:49.662Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 88,
+      "name": "| 088 | Priority Matrix | Productivity | Eisenhower matrix for task prioritization | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:52:04.882Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 89,
+      "name": "| 089 | Habit Tracker | Productivity | Track daily habits with streaks | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:52:20.705Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 90,
+      "name": "| 090 | Daily Planner | Productivity | Plan your day hour by hour | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:52:36.452Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 91,
+      "name": "| 091 | Weekly Planner | Productivity | Plan your week at a glance | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:52:51.281Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 92,
+      "name": "| 092 | Goal Tracker | Productivity | Set and track progress toward goals | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:53:06.589Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 93,
+      "name": "| 093 | Decision Maker | Productivity | Weighted pros and cons decision tool | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:53:21.466Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 94,
+      "name": "| 094 | Random Picker | Productivity | Pick a random item from a list | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:53:36.819Z",
+      "retries": 5,
+      "duration": 1,
+      "tokensUsed": 0
+    },
+    {
+      "day": 95,
+      "name": "| 095 | Wheel Spinner | Productivity | Spin a wheel to pick a random option | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:53:51.690Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 96,
+      "name": "| 096 | Team Generator | Productivity | Split a list into random teams | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:54:06.239Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 97,
+      "name": "| 097 | Meeting Agenda Builder | Productivity | Build structured meeting agendas | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:54:20.917Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 98,
+      "name": "| 098 | Retrospective Board | Productivity | Simple went well / improve / actions board | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:54:35.422Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 99,
+      "name": "| 099 | Kanban Board | Productivity | Simple drag-and-drop kanban board | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:54:49.927Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 100,
+      "name": "| 100 | Note Pad | Productivity | Quick plain text notepad | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:55:04.789Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 101,
+      "name": "| 101 | Sticky Notes | Productivity | Colorful sticky notes board | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:55:19.693Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 102,
+      "name": "| 102 | Mind Map | Productivity | Simple mind mapping tool | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:55:34.763Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 103,
+      "name": "| 103 | Checklist Builder | Productivity | Build reusable checklists | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:55:49.355Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 104,
+      "name": "| 104 | Time Zone Converter | Productivity | Convert time between timezones | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:56:04.270Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 105,
+      "name": "| 105 | Age Calculator | Productivity | Calculate exact age from birthdate | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:56:18.963Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    },
+    {
+      "day": 106,
+      "name": "| 106 | Date Difference Calculator | Productivity | Days between two dates | pending |",
+      "status": "failed",
+      "date": "2026-08-21T09:56:33.391Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 0
+    }
+  ],
+  "geminiStats": {
+    "tokensUsed": 0,
+    "tokenBudget": 50000,
+    "tokenBudgetRemaining": 50000,
+    "totalCalls": 0,
+    "totalInputTokens": 0,
+    "totalOutputTokens": 0,
+    "rateLimitedKeys": 0,
+    "totalKeys": 2
+  }
+}

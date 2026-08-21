@@ -1,0 +1,9 @@
+{
+  "name": "@365/scripts",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "@google/generative-ai": "^0.21.0",
+    "tsx": "^4.19.2"
+  }
+}

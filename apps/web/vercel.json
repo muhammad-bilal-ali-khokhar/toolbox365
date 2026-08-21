@@ -1,0 +1,7 @@
+{
+  "framework": "nextjs",
+  "installCommand": "npm install",
+  "buildCommand": "next build",
+  "outputDirectory": ".next",
+  "ignoreCommand": "git log -1 --pretty=%B | grep -qE '^(feat|chore|fix): day|chore: builder|chore: rate limited|chore: all'"
+}
