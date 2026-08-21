@@ -1,10 +1,10 @@
 {
   "status": "running",
-  "currentDay": 300,
+  "currentDay": 301,
   "totalFeatures": 365,
   "completedFeatures": 0,
-  "failedAttempts": 300,
-  "lastBuildDate": "2026-08-21T11:14:51.794Z",
+  "failedAttempts": 301,
+  "lastBuildDate": "2026-08-21T11:15:05.330Z",
   "lastBuildStatus": "failed",
   "startDate": "2026-08-21T09:30:47.593Z",
   "currentFeatureDay": null,
@@ -2708,6 +2708,15 @@
       "name": "| 300 | Calorie Calculator | Math | Estimate daily calorie needs | pending |",
       "status": "failed",
       "date": "2026-08-21T11:14:51.794Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 54525
+    },
+    {
+      "day": 301,
+      "name": "| 301 | Pace Calculator | Math | Calculate running pace and finish time | pending |",
+      "status": "failed",
+      "date": "2026-08-21T11:15:05.330Z",
       "retries": 5,
       "duration": 0,
       "tokensUsed": 54525
