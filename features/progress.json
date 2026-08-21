@@ -1,10 +1,10 @@
 {
   "status": "running",
-  "currentDay": 208,
+  "currentDay": 209,
   "totalFeatures": 365,
   "completedFeatures": 0,
-  "failedAttempts": 208,
-  "lastBuildDate": "2026-08-21T10:54:12.131Z",
+  "failedAttempts": 209,
+  "lastBuildDate": "2026-08-21T10:54:25.594Z",
   "lastBuildStatus": "failed",
   "startDate": "2026-08-21T09:30:47.593Z",
   "currentFeatureDay": null,
@@ -1880,6 +1880,15 @@
       "name": "| 208 | Budget Planner | Finance | Plan monthly income and expenses | pending |",
       "status": "failed",
       "date": "2026-08-21T10:54:12.131Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 54525
+    },
+    {
+      "day": 209,
+      "name": "| 209 | Expense Tracker | Finance | Track daily expenses by category | pending |",
+      "status": "failed",
+      "date": "2026-08-21T10:54:25.594Z",
       "retries": 5,
       "duration": 0,
       "tokensUsed": 54525
