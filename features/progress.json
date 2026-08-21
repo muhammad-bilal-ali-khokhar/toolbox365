@@ -1,10 +1,10 @@
 {
   "status": "running",
-  "currentDay": 272,
+  "currentDay": 273,
   "totalFeatures": 365,
   "completedFeatures": 0,
-  "failedAttempts": 272,
-  "lastBuildDate": "2026-08-21T11:08:33.872Z",
+  "failedAttempts": 273,
+  "lastBuildDate": "2026-08-21T11:08:47.359Z",
   "lastBuildStatus": "failed",
   "startDate": "2026-08-21T09:30:47.593Z",
   "currentFeatureDay": null,
@@ -2456,6 +2456,15 @@
       "name": "| 272 | Unit Converter | Math | Convert between units of measurement | pending |",
       "status": "failed",
       "date": "2026-08-21T11:08:33.872Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 54525
+    },
+    {
+      "day": 273,
+      "name": "| 273 | Length Converter | Math | Convert length units | pending |",
+      "status": "failed",
+      "date": "2026-08-21T11:08:47.359Z",
       "retries": 5,
       "duration": 0,
       "tokensUsed": 54525
