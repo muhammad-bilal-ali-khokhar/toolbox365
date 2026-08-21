@@ -1,10 +1,10 @@
 {
   "status": "running",
-  "currentDay": 249,
+  "currentDay": 250,
   "totalFeatures": 365,
   "completedFeatures": 0,
-  "failedAttempts": 249,
-  "lastBuildDate": "2026-08-21T11:03:23.385Z",
+  "failedAttempts": 250,
+  "lastBuildDate": "2026-08-21T11:03:37.150Z",
   "lastBuildStatus": "failed",
   "startDate": "2026-08-21T09:30:47.593Z",
   "currentFeatureDay": null,
@@ -2249,6 +2249,15 @@
       "name": "| 249 | Color Shades Generator | Design | Generate tints and shades of a color | pending |",
       "status": "failed",
       "date": "2026-08-21T11:03:23.385Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 54525
+    },
+    {
+      "day": 250,
+      "name": "| 250 | Typography Scale Generator | Design | Generate modular typography scales | pending |",
+      "status": "failed",
+      "date": "2026-08-21T11:03:37.150Z",
       "retries": 5,
       "duration": 0,
       "tokensUsed": 54525
