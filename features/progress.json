@@ -1,10 +1,10 @@
 {
   "status": "running",
-  "currentDay": 212,
+  "currentDay": 213,
   "totalFeatures": 365,
   "completedFeatures": 0,
-  "failedAttempts": 212,
-  "lastBuildDate": "2026-08-21T10:55:05.749Z",
+  "failedAttempts": 213,
+  "lastBuildDate": "2026-08-21T10:55:19.125Z",
   "lastBuildStatus": "failed",
   "startDate": "2026-08-21T09:30:47.593Z",
   "currentFeatureDay": null,
@@ -1916,6 +1916,15 @@
       "name": "| 212 | Percentage Calculator | Finance | Calculate percentages and changes | pending |",
       "status": "failed",
       "date": "2026-08-21T10:55:05.749Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 54525
+    },
+    {
+      "day": 213,
+      "name": "| 213 | Markup Calculator | Finance | Calculate price markup | pending |",
+      "status": "failed",
+      "date": "2026-08-21T10:55:19.125Z",
       "retries": 5,
       "duration": 0,
       "tokensUsed": 54525
