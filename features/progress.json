@@ -1,10 +1,10 @@
 {
   "status": "running",
-  "currentDay": 360,
+  "currentDay": 361,
   "totalFeatures": 365,
   "completedFeatures": 0,
-  "failedAttempts": 360,
-  "lastBuildDate": "2026-08-21T11:28:21.977Z",
+  "failedAttempts": 361,
+  "lastBuildDate": "2026-08-21T11:28:35.379Z",
   "lastBuildStatus": "failed",
   "startDate": "2026-08-21T09:30:47.593Z",
   "currentFeatureDay": null,
@@ -3248,6 +3248,15 @@
       "name": "| 360 | Video Thumbnail Extractor | File | Extract thumbnail from video file | pending |",
       "status": "failed",
       "date": "2026-08-21T11:28:21.977Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 54525
+    },
+    {
+      "day": 361,
+      "name": "| 361 | Font File Previewer | File | Preview characters in a font file | pending |",
+      "status": "failed",
+      "date": "2026-08-21T11:28:35.379Z",
       "retries": 5,
       "duration": 0,
       "tokensUsed": 54525
