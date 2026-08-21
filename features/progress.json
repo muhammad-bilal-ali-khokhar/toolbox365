@@ -1,10 +1,10 @@
 {
   "status": "running",
-  "currentDay": 299,
+  "currentDay": 300,
   "totalFeatures": 365,
   "completedFeatures": 0,
-  "failedAttempts": 299,
-  "lastBuildDate": "2026-08-21T11:14:38.279Z",
+  "failedAttempts": 300,
+  "lastBuildDate": "2026-08-21T11:14:51.794Z",
   "lastBuildStatus": "failed",
   "startDate": "2026-08-21T09:30:47.593Z",
   "currentFeatureDay": null,
@@ -2699,6 +2699,15 @@
       "name": "| 299 | BMI Calculator | Math | Calculate Body Mass Index | pending |",
       "status": "failed",
       "date": "2026-08-21T11:14:38.279Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 54525
+    },
+    {
+      "day": 300,
+      "name": "| 300 | Calorie Calculator | Math | Estimate daily calorie needs | pending |",
+      "status": "failed",
+      "date": "2026-08-21T11:14:51.794Z",
       "retries": 5,
       "duration": 0,
       "tokensUsed": 54525
