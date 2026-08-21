@@ -1,10 +1,10 @@
 {
   "status": "running",
-  "currentDay": 350,
+  "currentDay": 351,
   "totalFeatures": 365,
   "completedFeatures": 0,
-  "failedAttempts": 350,
-  "lastBuildDate": "2026-08-21T11:26:06.949Z",
+  "failedAttempts": 351,
+  "lastBuildDate": "2026-08-21T11:26:20.630Z",
   "lastBuildStatus": "failed",
   "startDate": "2026-08-21T09:30:47.593Z",
   "currentFeatureDay": null,
@@ -3158,6 +3158,15 @@
       "name": "| 350 | Text File Encoder | File | Convert text file encoding | pending |",
       "status": "failed",
       "date": "2026-08-21T11:26:06.949Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 54525
+    },
+    {
+      "day": 351,
+      "name": "| 351 | JSON File Formatter | File | Format a JSON file upload | pending |",
+      "status": "failed",
+      "date": "2026-08-21T11:26:20.630Z",
       "retries": 5,
       "duration": 0,
       "tokensUsed": 54525
