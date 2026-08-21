@@ -1,6 +1,52 @@
+'use client'
+
+import { useEffect, useState } from 'react'
+import Link from 'next/link'
+
+const API = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3001'
+
+interface Feature {
+  day: number
+  name: string
+  status: string
+  date: string
+}
+
+interface Progress {
+  status: string
+  currentDay: number
+  totalFeatures: number
+  completedFeatures: number
+  successRate: number
+  daysRemaining: number
+  lastBuildDate: string | null
+  allFeatures: Feature[]
+}
+
 export default function Home() {
-  const progress = 0
-  const total = 365
+  const [data, setData] = useState<Progress | null>(null)
+
+  useEffect(() => {
+    fetch(`${API}/admin/public/progress`)
+      .then((r) => r.json())
+      .then(setData)
+      .catch(() => null)
+  }, [])
+
+  const completed = data?.completedFeatures ?? 0
+  const total = data?.totalFeatures ?? 365
+  const pct = Math.round((completed / total) * 100)
+  const statusLabel =
+    data?.status === 'running' ? 'Building...' :
+    data?.status === 'completed' ? '🎉 Complete!' :
+    data?.status === 'stopped' ? 'Paused' :
+    data?.status === 'rate_limited' ? 'Rate limited' :
+    'Starting soon'
+
+  const statusColor =
+    data?.status === 'running' ? 'bg-blue-500/10 text-blue-400 border-blue-500/20' :
+    data?.status === 'completed' ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' :
+    'bg-zinc-800 text-zinc-400 border-zinc-700'
 
   return (
     <main className="min-h-screen flex flex-col items-center justify-center px-4 py-16">
@@ -14,16 +60,15 @@ export default function Home() {
 
         {/* Status Card */}
         <div className="rounded-2xl border border-zinc-800 bg-zinc-900 p-8 space-y-6">
-
           <div className="flex items-center justify-between">
             <div>
               <p className="text-zinc-500 text-sm uppercase tracking-widest">Current Day</p>
-              <p className="text-4xl font-bold text-white mt-1">Day 0</p>
+              <p className="text-4xl font-bold text-white mt-1">Day {data?.currentDay ?? 0}</p>
             </div>
             <div className="text-right">
               <p className="text-zinc-500 text-sm uppercase tracking-widest">Status</p>
-              <span className="inline-block mt-1 px-3 py-1 rounded-full text-sm font-medium bg-zinc-800 text-zinc-400 border border-zinc-700">
-                Challenge not started
+              <span className={`inline-block mt-1 px-3 py-1 rounded-full text-sm font-medium border ${statusColor}`}>
+                {data ? statusLabel : 'Loading...'}
               </span>
             </div>
           </div>
@@ -32,22 +77,23 @@ export default function Home() {
           <div className="space-y-2">
             <div className="flex justify-between text-sm text-zinc-500">
               <span>Progress</span>
-              <span>{progress} / {total}</span>
+              <span>{completed} / {total}</span>
             </div>
             <div className="h-2 rounded-full bg-zinc-800 overflow-hidden">
               <div
-                className="h-full rounded-full bg-indigo-500 transition-all duration-500"
-                style={{ width: `${(progress / total) * 100}%` }}
+                className="h-full rounded-full bg-indigo-500 transition-all duration-700"
+                style={{ width: `${pct}%` }}
               />
             </div>
+            <p className="text-zinc-600 text-xs text-right">{pct}% complete</p>
           </div>
 
           {/* Stats */}
           <div className="grid grid-cols-3 gap-4 pt-2">
             {[
-              { label: 'Features Built', value: '0' },
-              { label: 'Days Remaining', value: '365' },
-              { label: 'Success Rate', value: '—' },
+              { label: 'Features Built', value: completed.toString() },
+              { label: 'Days Remaining', value: (data?.daysRemaining ?? 365).toString() },
+              { label: 'Success Rate', value: data ? `${data.successRate}%` : '—' },
             ].map((stat) => (
               <div key={stat.label} className="rounded-xl bg-zinc-800/50 p-4 text-center">
                 <p className="text-2xl font-bold text-white">{stat.value}</p>
@@ -60,19 +106,44 @@ export default function Home() {
         {/* Features Grid */}
         <div className="rounded-2xl border border-zinc-800 bg-zinc-900 p-8">
           <h2 className="text-zinc-400 text-sm uppercase tracking-widest mb-6">Features</h2>
-          <div className="flex flex-col items-center justify-center py-12 space-y-3">
-            <div className="text-5xl">🚀</div>
-            <p className="text-zinc-500 text-center">No features built yet.</p>
-            <p className="text-zinc-600 text-sm text-center">
-              The autonomous builder will add one feature every day starting on Day 1.
-            </p>
-          </div>
+          {!data || data.allFeatures?.length === 0 ? (
+            <div className="flex flex-col items-center justify-center py-12 space-y-3">
+              <div className="text-5xl">🚀</div>
+              <p className="text-zinc-500 text-center">No features built yet.</p>
+              <p className="text-zinc-600 text-sm text-center">
+                The autonomous builder will add one feature every day starting on Day 1.
+              </p>
+            </div>
+          ) : (
+            <div className="space-y-1">
+              {data.allFeatures.map((f) => (
+                <div key={f.day} className="flex items-center justify-between py-2.5 border-b border-zinc-800/60 last:border-0">
+                  <div className="flex items-center gap-3">
+                    <span className="text-zinc-600 text-xs font-mono w-14">Day {String(f.day).padStart(3, '0')}</span>
+                    <Link
+                      href={`/tools/${f.name.split('|')[2]?.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') ?? `day-${f.day}`}`}
+                      className="text-zinc-200 text-sm hover:text-indigo-400 transition-colors"
+                    >
+                      {f.name.split('|')[2]?.trim() ?? f.name}
+                    </Link>
+                  </div>
+                  <span className={`px-2 py-0.5 rounded-full text-xs border font-medium ${
+                    f.status === 'completed'
+                      ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
+                      : 'bg-red-500/10 text-red-400 border-red-500/20'
+                  }`}>
+                    {f.status}
+                  </span>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Footer */}
         <div className="text-center space-y-2">
           <a
-            href="https://github.com"
+            href="https://github.com/muhammad-bilal-ali-khokhar/toolbox365"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-zinc-500 hover:text-zinc-300 text-sm transition-colors"

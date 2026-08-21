@@ -191,7 +191,7 @@ async function main() {
       rateLimitedUntil: i < limitedCount ? resumeAt : null,
     }))
     writeProgress(progress)
-    commitChanges(`chore: pause — Gemini rate limited, resume at ${resumeAt}`)
+    commitChanges(`update progress`)
     pushChanges()
     console.log(`⏳ Rate limited. Will resume at ${resumeAt}`)
     return
@@ -214,18 +214,17 @@ async function main() {
     if (existing >= 0) progress.features[existing] = entry
     else progress.features.push(entry)
     writeProgress(progress)
-    commitChanges(`feat: day ${String(targetDay).padStart(3, '0')} — ${featureName} (${category})`)
+    commitChanges(`add ${featureName} tool`)
     pushChanges()
     console.log(`✅ Day ${targetDay} done. Tokens: ~${getTokensUsed()}`)
   } else {
-    // Failed — log it, push it, move on. No fix. No retry.
     progress.failedAttempts += 1
     progress.lastBuildStatus = 'failed'
     const entry: FeatureEntry = { day: targetDay, name: featureLine, status: 'failed', date: now, retries: 0, duration: buildDuration, tokensUsed: getTokensUsed() }
     if (existing >= 0) progress.features[existing] = entry
     else progress.features.push(entry)
     writeProgress(progress)
-    commitChanges(`chore: day ${String(targetDay).padStart(3, '0')} — ${featureName} skipped (build failed, moving on)`)
+    commitChanges(`update progress`)
     pushChanges()
     console.log(`❌ Day ${targetDay} failed. Moving on — next run will build Day ${targetDay + 1}.`)
   }

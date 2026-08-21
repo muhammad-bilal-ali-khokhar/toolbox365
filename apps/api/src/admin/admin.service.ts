@@ -22,9 +22,9 @@ export class AdminService {
   }
 
   private async readProgress() {
-    const data = await this.githubGet(PROGRESS_FILE)
+    const data = await this.githubGet(PROGRESS_FILE) as { content: string; sha: string }
     const content = Buffer.from(data.content, 'base64').toString('utf-8')
-    return { progress: JSON.parse(content), sha: data.sha as string }
+    return { progress: JSON.parse(content), sha: data.sha }
   }
 
   private async writeProgress(progress: Record<string, unknown>, sha: string) {
@@ -37,12 +37,43 @@ export class AdminService {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        message: `chore: update builder status to "${progress.status}"`,
+        message: `update progress`,
         content,
         sha,
       }),
     })
     if (!res.ok) throw new Error(`GitHub PUT failed: ${res.status} ${await res.text()}`)
+  }
+
+  async getPublicProgress() {
+    try {
+      const { progress } = await this.readProgress()
+      const features = progress.features ?? []
+      const completed = features.filter((f: { status: string }) => f.status === 'completed').length
+      const successRate = features.length > 0 ? Math.round((completed / features.length) * 100) : 0
+      const sorted = [...features].sort((a: { day: number }, b: { day: number }) => b.day - a.day)
+      return {
+        status: progress.status ?? 'idle',
+        currentDay: progress.currentDay ?? 0,
+        totalFeatures: progress.totalFeatures ?? 365,
+        completedFeatures: completed,
+        successRate,
+        daysRemaining: (progress.totalFeatures ?? 365) - (progress.currentDay ?? 0),
+        lastBuildDate: progress.lastBuildDate ?? null,
+        allFeatures: sorted,
+      }
+    } catch {
+      return {
+        status: 'idle',
+        currentDay: 0,
+        totalFeatures: 365,
+        completedFeatures: 0,
+        successRate: 0,
+        daysRemaining: 365,
+        lastBuildDate: null,
+        allFeatures: [],
+      }
+    }
   }
 
   async getFullStatus() {

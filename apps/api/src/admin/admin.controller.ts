@@ -12,6 +12,12 @@ export class AdminController {
     }
   }
 
+  // Public endpoint — no password needed, used by homepage
+  @Get('/public/progress')
+  publicProgress() {
+    return this.adminService.getPublicProgress()
+  }
+
   @Get('status')
   getStatus(@Headers() headers: Record<string, string>) {
     this.auth(headers)
