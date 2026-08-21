@@ -1,10 +1,10 @@
 {
   "status": "running",
-  "currentDay": 327,
+  "currentDay": 328,
   "totalFeatures": 365,
   "completedFeatures": 0,
-  "failedAttempts": 327,
-  "lastBuildDate": "2026-08-21T11:20:56.122Z",
+  "failedAttempts": 328,
+  "lastBuildDate": "2026-08-21T11:21:09.473Z",
   "lastBuildStatus": "failed",
   "startDate": "2026-08-21T09:30:47.593Z",
   "currentFeatureDay": null,
@@ -2951,6 +2951,15 @@
       "name": "| 327 | Word Scramble | Fun | Unscramble the scrambled word | pending |",
       "status": "failed",
       "date": "2026-08-21T11:20:56.122Z",
+      "retries": 5,
+      "duration": 0,
+      "tokensUsed": 54525
+    },
+    {
+      "day": 328,
+      "name": "| 328 | Hangman Game | Fun | Classic hangman word game | pending |",
+      "status": "failed",
+      "date": "2026-08-21T11:21:09.473Z",
       "retries": 5,
       "duration": 0,
       "tokensUsed": 54525
