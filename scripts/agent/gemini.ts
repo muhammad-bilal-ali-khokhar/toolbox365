@@ -48,7 +48,7 @@ async function callGemini(prompt: string): Promise<string> {
 
     try {
       const client = new GoogleGenerativeAI(keys[i])
-      const model = client.getGenerativeModel({ model: 'gemini-2.5-flash' })
+      const model = client.getGenerativeModel({ model: 'gemini-3.6-flash' })
       const result = await model.generateContent(prompt)
       const text = result.response.text()
       const inputEst = Math.ceil(prompt.length / 4)
