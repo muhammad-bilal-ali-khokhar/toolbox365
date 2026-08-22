@@ -1,10 +1,10 @@
 {
   "status": "running",
-  "currentDay": 4,
+  "currentDay": 5,
   "totalFeatures": 365,
   "completedFeatures": 0,
-  "failedAttempts": 4,
-  "lastBuildDate": "2026-08-22T10:19:21.238Z",
+  "failedAttempts": 5,
+  "lastBuildDate": "2026-08-22T22:31:44.649Z",
   "lastBuildStatus": "failed",
   "startDate": "2026-08-21T15:30:14.697Z",
   "currentFeatureDay": null,
@@ -56,16 +56,25 @@
       "retries": 0,
       "duration": 73,
       "tokensUsed": 0
+    },
+    {
+      "day": 5,
+      "name": "| 005 | Password Generator | Developer | Generate secure random passwords | pending |",
+      "status": "failed",
+      "date": "2026-08-22T22:31:44.649Z",
+      "retries": 0,
+      "duration": 116,
+      "tokensUsed": 10262
     }
   ],
   "currentFeatureName": null,
   "geminiStats": {
-    "tokensUsed": 0,
+    "tokensUsed": 10262,
     "tokenBudget": 50000,
-    "tokenBudgetRemaining": 50000,
-    "totalCalls": 0,
-    "totalInputTokens": 0,
-    "totalOutputTokens": 0,
+    "tokenBudgetRemaining": 39738,
+    "totalCalls": 1,
+    "totalInputTokens": 2723,
+    "totalOutputTokens": 7539,
     "rateLimitedKeys": 0,
     "totalKeys": 2
   }
